@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { Download } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -65,7 +66,7 @@ export default function BillingAgingView() {
               const hold = shouldAutoHold(r, limitOf(r.client));
               return (
                 <tr key={r.client} className="border-b">
-                  <td className="p-2 font-medium">{r.client}</td>
+                  <td className="p-2 font-medium"><Link to={`../clients?open=${encodeURIComponent(r.client)}`} relative="path" className="hover:underline">{r.client}</Link></td>
                   {BUCKETS.map((b) => <td key={b} className="p-2 text-right tabular-nums">{r.buckets[b] ? money(r.buckets[b]) : "—"}</td>)}
                   <td className="p-2 text-right font-semibold tabular-nums">{money(r.total)}</td>
                   <td className="space-x-1 p-2"><Badge variant={riskTone[r.risk]}>{r.risk}</Badge>{hold && <Badge variant="destructive">Credit hold</Badge>}</td>

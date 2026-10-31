@@ -1,18 +1,16 @@
 import { useSearchParams } from "react-router-dom";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import LabRegisterPage from "./LabRegisterPage";
-import DlabStatementsPage from "./DlabStatementsPage";
 import DlabInvoicesPage from "./DlabInvoicesPage";
 import BillingAgingView from "./billing/BillingAgingView";
 import CreditNoteDialog from "./billing/CreditNoteDialog";
 
 const TABS = [
-  { value: "receivables", label: "Receivables" },
+  { value: "receivables", label: "Invoices & Receivables" },
   { value: "payments", label: "Payments & Credits" },
-  { value: "statements", label: "Statements" },
 ];
 // Old links (?tab=aging / credits) land on the merged tab.
-const ALIAS: Record<string, string> = { aging: "receivables", credits: "payments", prices: "receivables" };
+const ALIAS: Record<string, string> = { aging: "receivables", credits: "payments", prices: "receivables", statements: "receivables" };
 
 export default function DlabBillingPage() {
   const [params, setParams] = useSearchParams();
@@ -37,7 +35,6 @@ export default function DlabBillingPage() {
           <LabRegisterPage kind="credit-notes" />
         </div>
       </TabsContent>
-      <TabsContent value="statements"><DlabStatementsPage /></TabsContent>
     </Tabs>
   );
 }
