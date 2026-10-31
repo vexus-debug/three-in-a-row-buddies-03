@@ -6,8 +6,8 @@ import BillingAgingView from "./billing/BillingAgingView";
 import CreditNoteDialog from "./billing/CreditNoteDialog";
 
 const TABS = [
-  { value: "receivables", label: "Invoices & Receivables" },
-  { value: "payments", label: "Payments & Credits" },
+  { value: "receivables", label: "Invoices" },
+  { value: "payments", label: "Payments & Credits (money received)" },
 ];
 // Old links (?tab=aging / credits) land on the merged tab.
 const ALIAS: Record<string, string> = { aging: "receivables", credits: "payments", prices: "receivables", statements: "receivables" };
