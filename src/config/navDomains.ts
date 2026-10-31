@@ -170,11 +170,6 @@ export const DENTAL_LAB_HUBS: HubDomain[] = [
     tabs: [
       { title: "Clients", path: "dlab/clients" },
       { title: "Recurring Orders", path: "dlab/r/recurring" },
-      { title: "Price Books", path: "dlab/r/client-prices" },
-      { title: "Invoices", path: "dlab/invoices" },
-      { title: "Statements", path: "dlab/statements" },
-      { title: "Payments Received", path: "dlab/r/client-payments" },
-      { title: "Credit Notes", path: "dlab/r/credit-notes" },
       { title: "Billing", path: "dlab/billing" },
     ],
   },

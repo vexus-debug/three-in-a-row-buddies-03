@@ -306,7 +306,6 @@ const dentalLabNav: NavGroup[] = [
   { label: "Clients & Money", items: [
     { title: "Clients", path: "dlab/clients", icon: Users },
     { title: "Recurring Orders", path: "dlab/r/recurring", icon: CalendarClock },
-    { title: "Invoices", path: "dlab/invoices", icon: Receipt },
     { title: "Billing", path: "dlab/billing", icon: Wallet },
   ] },
   { label: "Logistics", items: [

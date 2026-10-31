@@ -362,8 +362,8 @@ const App = () => (
               <Route path="dlab/calendar" element={<DlabCalendarPage />} />
               <Route path="dlab/bench" element={<DlabBenchPage />} />
               <Route path="dlab/clients" element={<DlabClientsPage />} />
-              <Route path="dlab/invoices" element={<DlabInvoicesPage />} />
-              <Route path="dlab/statements" element={<DlabStatementsPage />} />
+              <Route path="dlab/invoices" element={<Navigate to="../dlab/billing" replace />} />
+              <Route path="dlab/statements" element={<Navigate to="../dlab/clients" replace />} />
               <Route path="dlab/billing" element={<DlabBillingPage />} />
               <Route path="dlab/catalogue" element={<DlabCataloguePage />} />
               <Route path="dlab/store" element={<DlabStorePage />} />
