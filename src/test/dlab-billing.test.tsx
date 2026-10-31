@@ -19,7 +19,7 @@ vi.mock("@/pages/dashboard/dlab/DlabInvoicesPage", () => ({ default: () => <div>
 import DlabBillingPage from "@/pages/dashboard/dlab/DlabBillingPage";
 
 describe("DlabBillingPage", () => {
-  it("has three billing tabs, Price Books moved out", () => {
+  it("has two billing tabs; statements live in the client account", () => {
     render(
       <QueryClientProvider client={new QueryClient()}>
         <MemoryRouter initialEntries={["/app/clinic/demo/dlab/billing"]}>
@@ -27,7 +27,7 @@ describe("DlabBillingPage", () => {
         </MemoryRouter>
       </QueryClientProvider>,
     );
-    expect(screen.getAllByRole("tab").map((t) => t.textContent)).toEqual(["Receivables", "Payments & Credits", "Statements"]);
+    expect(screen.getAllByRole("tab").map((t) => t.textContent)).toEqual(["Invoices & Receivables", "Payments & Credits"]);
     expect(screen.getByText("Invoices list")).toBeInTheDocument();
   });
 });

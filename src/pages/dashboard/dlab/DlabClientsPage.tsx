@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { differenceInDays, addDays } from "date-fns";
 import { Plus, Search, UserPlus } from "lucide-react";
 import { PageHeader } from "@/components/dashboard/PageHeader";
@@ -32,7 +33,8 @@ export default function DlabClientsPage() {
   const [q, setQ] = useState("");
   const [newFor, setNewFor] = useState<string | null>(null);
   const [edit, setEdit] = useState<{ record: LabRecord | null; name: string } | null>(null);
-  const [openName, setOpenName] = useState<string | null>(null);
+  const [params] = useSearchParams();
+  const [openName, setOpenName] = useState<string | null>(params.get("open"));
 
   const rows: ClientRow[] = useMemo(() => {
     const profs = profiles.data || [];
@@ -69,7 +71,7 @@ export default function DlabClientsPage() {
     ["On credit hold", String(rows.filter((r) => r.onHold).length)],
     ["30+ day delinquency", withBal.length ? `${Math.round((rows.filter((r) => r.overdue30).length / withBal.length) * 100)}%` : "0%"],
   ];
-  const open = rows.find((r) => r.name === openName) || null;
+  const open = rows.find((r) => openName && sameClient(r.name, openName)) || null;
   const loading = s.isLoading || profiles.isLoading;
 
   return (

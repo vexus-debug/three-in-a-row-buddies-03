@@ -13,6 +13,7 @@ import { patientOf } from "@/hooks/useDentalLab";
 import { buildLedger, termLabel, tierLabel, toProfileRecord } from "@/lib/labClients";
 import { money } from "./dlabMoney";
 import { fromRecord } from "./ClientFormDialog";
+import DlabStatementsPage from "./DlabStatementsPage";
 import type { ClientRow } from "./DlabClientsPage";
 
 const d = (s?: string | null) => (s ? format(new Date(s), "d MMM yyyy") : "—");
@@ -40,7 +41,7 @@ export function ClientAccount360Drawer({ row, onClose, onEdit }: { row: ClientRo
         </SheetHeader>
         <div className="mt-3"><Button size="sm" variant="outline" onClick={() => onEdit(row)}><Pencil className="mr-1 h-3.5 w-3.5" />{p ? "Edit account" : "Create account"}</Button></div>
         <Tabs defaultValue="summary" className="mt-4">
-          <TabsList className="grid w-full grid-cols-4"><TabsTrigger value="summary">Summary</TabsTrigger><TabsTrigger value="doctors">Doctors</TabsTrigger><TabsTrigger value="cases">Cases</TabsTrigger><TabsTrigger value="ledger">Ledger</TabsTrigger></TabsList>
+          <TabsList className="grid w-full grid-cols-4"><TabsTrigger value="summary">Summary</TabsTrigger><TabsTrigger value="doctors">Doctors</TabsTrigger><TabsTrigger value="cases">Cases</TabsTrigger><TabsTrigger value="ledger">Statement</TabsTrigger></TabsList>
 
           <TabsContent value="summary" className="space-y-4">
             <div className="grid grid-cols-2 gap-2 text-sm sm:grid-cols-4">
@@ -80,12 +81,7 @@ export function ClientAccount360Drawer({ row, onClose, onEdit }: { row: ClientRo
           </TabsContent>
 
           <TabsContent value="ledger">
-            <table className="w-full text-sm tabular-nums"><thead><tr className="border-b text-left text-xs text-muted-foreground"><th className="py-1">Date</th><th>Type</th><th>Ref</th><th className="text-right">Debit</th><th className="text-right">Credit</th><th className="text-right">Balance</th></tr></thead>
-              <tbody>{ledger.map((e, i) => (
-                <tr key={i} className="border-b"><td className="py-1.5">{d(e.date)}</td><td className="capitalize">{e.kind}</td><td className="truncate">{e.ref}</td>
-                  <td className="text-right">{e.debit ? money(e.debit) : ""}</td><td className="text-right">{e.credit ? money(e.credit) : ""}</td><td className="text-right font-medium">{money(e.balance)}</td></tr>
-              ))}</tbody></table>
-            {!ledger.length && <p className="py-6 text-center text-sm text-muted-foreground">No invoices or payments yet.</p>}
+            <DlabStatementsPage client={row.name} />
           </TabsContent>
         </Tabs>
       </SheetContent>

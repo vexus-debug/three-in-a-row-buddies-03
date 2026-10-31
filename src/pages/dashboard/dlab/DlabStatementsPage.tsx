@@ -13,13 +13,13 @@ import { useClientSummaries, money, sameClient } from "./dlabMoney";
 type Period = "all" | "this" | "last" | "custom";
 const ymd = (d: Date) => format(d, "yyyy-MM-dd");
 
-export default function DlabStatementsPage() {
+export default function DlabStatementsPage({ client: fixed }: { client?: string } = {}) {
   const { data, cases, invoices: allInvoices, payments, credits, isLoading } = useClientSummaries();
   const [client, setClient] = useState<string>("");
   const [period, setPeriod] = useState<Period>("all");
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
-  const current = client || data[0]?.name || "";
+  const current = fixed || client || data[0]?.name || "";
 
   const range = useMemo(() => {
     const now = new Date();
@@ -55,14 +55,18 @@ export default function DlabStatementsPage() {
 
   return (
     <div className="space-y-5">
+      {fixed ? (
+        <div className="flex justify-end"><Button size="sm" variant="outline" onClick={() => window.print()}><Printer className="mr-1 h-4 w-4" />Print statement</Button></div>
+      ) : (
       <PageHeader title="Statements" description="Running account per client clinic: work billed, payments and credits.">
         <Button variant="outline" onClick={() => window.print()} disabled={!current}><Printer className="mr-1 h-4 w-4" />Print</Button>
       </PageHeader>
+      )}
       <div className="flex flex-wrap items-end gap-3">
-        <Select value={current} onValueChange={setClient}>
+        {!fixed && <Select value={current} onValueChange={setClient}>
           <SelectTrigger className="w-full max-w-sm"><SelectValue placeholder="Choose a clinic" /></SelectTrigger>
           <SelectContent>{data.map((c) => <SelectItem key={c.name} value={c.name}>{c.name} · {money(c.balance)}</SelectItem>)}</SelectContent>
-        </Select>
+        </Select>}
         <Select value={period} onValueChange={(v) => setPeriod(v as Period)}>
           <SelectTrigger className="w-40"><SelectValue /></SelectTrigger>
           <SelectContent>
