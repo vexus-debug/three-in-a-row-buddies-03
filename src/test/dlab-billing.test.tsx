@@ -8,21 +8,18 @@ vi.mock("@/hooks/useLabRecords", () => ({
   useSaveLabRecord: () => ({ mutate: vi.fn(), isPending: false }),
   useDeleteLabRecord: () => ({ mutate: vi.fn(), isPending: false }),
 }));
-
 vi.mock("@/pages/dashboard/dlab/dlabMoney", () => ({
-  useClientSummaries: () => ({ data: [], cases: [], payments: [], credits: [], isLoading: false }),
+  useClientSummaries: () => ({ data: [], cases: [], payments: [], credits: [], invoices: [], isLoading: false }),
   money: (n: number) => `₦${n}`,
   sameClient: () => true,
 }));
-
-vi.mock("@/hooks/useDentalLab", () => ({
-  clientOf: () => "",
-}));
+vi.mock("@/hooks/useDentalLab", () => ({ clientOf: () => "" }));
+vi.mock("@/pages/dashboard/dlab/DlabInvoicesPage", () => ({ default: () => <div>Invoices list</div> }));
 
 import DlabBillingPage from "@/pages/dashboard/dlab/DlabBillingPage";
 
 describe("DlabBillingPage", () => {
-  it("renders the four billing tabs and the statements panel", () => {
+  it("has three billing tabs, Price Books moved out", () => {
     render(
       <QueryClientProvider client={new QueryClient()}>
         <MemoryRouter initialEntries={["/app/clinic/demo/dlab/billing"]}>
@@ -30,11 +27,7 @@ describe("DlabBillingPage", () => {
         </MemoryRouter>
       </QueryClientProvider>,
     );
-
-    expect(screen.getByRole("tab", { name: "Statements" })).toBeInTheDocument();
-    expect(screen.getByRole("tab", { name: "Payments Received" })).toBeInTheDocument();
-    expect(screen.getByRole("tab", { name: "Client Prices" })).toBeInTheDocument();
-    expect(screen.getByRole("tab", { name: "Credit Notes" })).toBeInTheDocument();
-    expect(screen.getByText("Running account per client clinic: work billed, payments and credits.")).toBeInTheDocument();
+    expect(screen.getAllByRole("tab").map((t) => t.textContent)).toEqual(["Receivables", "Payments & Credits", "Statements"]);
+    expect(screen.getByText("Invoices list")).toBeInTheDocument();
   });
 });

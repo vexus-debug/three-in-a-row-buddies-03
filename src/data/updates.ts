@@ -13,6 +13,16 @@ export interface UpdateEntry {
 
 export const updates: UpdateEntry[] = [
   {
+    version: "v2.42.0",
+    date: "October 31, 2026",
+    title: "Simpler dental lab billing",
+    kind: "improvement",
+    items: [
+      { kind: "improvement", text: "Billing now has three tabs: Receivables (aging + invoices), Payments & Credits, and Statements." },
+      { kind: "improvement", text: "The price grid moved to Catalogue → Prices, next to the other price lists." },
+    ],
+  },
+  {
     version: "v2.41.0",
     date: "October 31, 2026",
     title: "Dental lab statements, price books & credit notes",
