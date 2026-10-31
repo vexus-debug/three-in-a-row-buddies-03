@@ -13,6 +13,17 @@ export interface UpdateEntry {
 
 export const updates: UpdateEntry[] = [
   {
+    version: "v2.43.0",
+    date: "October 31, 2026",
+    title: "Statements moved into client accounts",
+    kind: "improvement",
+    items: [
+      { kind: "improvement", text: "Billing now has two tabs: Invoices & Receivables, and Payments & Credits." },
+      { kind: "improvement", text: "Client statements (with print and remittance slip) now live in each client's account panel, Statement tab." },
+      { kind: "improvement", text: "Click a clinic in the aging table to open its client account." },
+    ],
+  },
+  {
     version: "v2.42.0",
     date: "October 31, 2026",
     title: "Simpler dental lab billing",
