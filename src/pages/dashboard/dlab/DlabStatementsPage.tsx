@@ -103,6 +103,17 @@ export default function DlabStatementsPage() {
           </table>
         )}
       </CardContent></Card>
+      {current && (
+        <div className="break-inside-avoid border-t-2 border-dashed pt-4 text-sm">
+          <p className="mb-2 text-xs uppercase tracking-wide text-muted-foreground">✂ Remittance advice — detach and return with payment</p>
+          <div className="grid gap-2 sm:grid-cols-4">
+            <div><p className="text-xs text-muted-foreground">Client</p><p className="font-medium">{current}</p></div>
+            <div><p className="text-xs text-muted-foreground">Period</p><p className="font-medium">{range.from ? `${range.from} – ${range.to}` : "All time"}</p></div>
+            <div><p className="text-xs text-muted-foreground">Amount due</p><p className="font-bold">{money(balance)}</p></div>
+            <div><p className="text-xs text-muted-foreground">Amount paid / reference</p><p className="border-b pt-4" /></div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

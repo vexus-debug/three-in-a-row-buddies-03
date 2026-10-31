@@ -13,6 +13,17 @@ export interface UpdateEntry {
 
 export const updates: UpdateEntry[] = [
   {
+    version: "v2.41.0",
+    date: "October 31, 2026",
+    title: "Dental lab statements, price books & credit notes",
+    kind: "feature",
+    items: [
+      { kind: "feature", text: "Printed client statements now end with a tear-off remittance advice slip." },
+      { kind: "feature", text: "Price Books tab: spreadsheet-style price matrix with tier prices worked out automatically." },
+      { kind: "feature", text: "Issue remake or adjustment credit notes linked to an invoice; the invoice balance drops right away." },
+    ],
+  },
+  {
     version: "v2.40.0",
     date: "October 31, 2026",
     title: "Dental lab A/R aging & payment reconciliation",
