@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useLabRecords } from "@/hooks/useLabRecords";
 import { CLINICAL_DOMAINS, clinicalDomain } from "@/lib/labCatalog";
 import LabRegisterPage from "./LabRegisterPage";
+import PriceMatrixEditor from "./billing/PriceMatrixEditor";
 
 const TABS = [
   { value: "services", label: "Restoration Services" },
@@ -61,6 +62,7 @@ export default function DlabCataloguePage() {
         <LabRegisterPage kind="work-types" />
       </TabsContent>
       <TabsContent value="prices" className="space-y-8">
+        <PriceMatrixEditor />
         <LabRegisterPage kind="price-tiers" />
         <LabRegisterPage kind="client-prices" />
       </TabsContent>
